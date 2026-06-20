@@ -1,0 +1,102 @@
+/*!
+ * AIHub 后台样式 —— 紫粉渐变设计系统（aihub- 前缀）
+ * 变量定义在 .aihub-admin（wrap）上，确保子元素能取到 var()
+ */
+.aihub-admin {
+  --ah-p: #6366f1;
+  --ah-grad: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  --ah-grad-soft: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 100%);
+  --ah-bg: #f8fafc;
+  --ah-card: #fff;
+  --ah-brd: #cbd5e1;
+  --ah-brd-soft: #e2e8f0;
+  --ah-txt: #0f172a;
+  --ah-mut: #64748b;
+  font-size: 13px;
+  color: var(--ah-txt);
+}
+.aihub-admin h1 { display: flex; align-items: center; gap: 10px; font-size: 22px; }
+.aihub-ver {
+  font-size: 11px; color: #fff; font-weight: 600;
+  padding: 3px 10px; background: var(--ah-grad); border-radius: 12px;
+  box-shadow: 0 4px 10px -4px rgba(168,85,247,.4);
+}
+
+/* Tabs */
+.aihub-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--ah-brd); margin: 16px 0 24px; overflow-x: auto; }
+.aihub-tab {
+  padding: 10px 18px; font-size: 13px; font-weight: 500; color: var(--ah-mut);
+  text-decoration: none; border: 1px solid transparent; border-bottom: none;
+  border-radius: 8px 8px 0 0; white-space: nowrap;
+}
+.aihub-tab:hover { color: var(--ah-p); background: var(--ah-bg); }
+.aihub-tab.is-active { color: var(--ah-p); background: #fff; border-color: var(--ah-brd); font-weight: 600; position: relative; }
+.aihub-tab.is-active::before { content: ''; position: absolute; left: 8%; right: 8%; top: 0; height: 3px; background: var(--ah-grad); border-radius: 0 0 3px 3px; }
+
+/* Card box */
+.aihub-card-box { background: #fff; border: 1px solid var(--ah-brd); border-radius: 14px; box-shadow: 0 2px 4px rgba(15,23,42,.05); margin: 0 0 24px; overflow: hidden; }
+.aihub-box-hd { padding: 14px 20px; border-bottom: 1px solid var(--ah-brd); font-weight: 600; font-size: 14px; background: var(--ah-grad-soft); display: flex; align-items: center; gap: 8px; }
+.aihub-meta { font-weight: 400; font-size: 11px; color: #94a3b8; }
+.aihub-box-bd { padding: 20px; }
+.aihub-tip { color: var(--ah-mut); font-size: 12px; margin: 0 0 14px; }
+.aihub-tip code, .aihub-shortcodes code { background: #eef2ff; color: #4338ca; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+.aihub-h3 { margin: 24px 0 10px; font-size: 14px; padding-top: 16px; border-top: 1px dashed var(--ah-brd-soft); }
+
+/* Table */
+.aihub-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.aihub-tbl th { text-align: left; padding: 10px 12px; font-size: 10px; font-weight: 600; color: var(--ah-mut); text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--ah-brd); background: var(--ah-bg); }
+.aihub-tbl td { padding: 10px 12px; border-bottom: 1px solid var(--ah-brd-soft); vertical-align: top; }
+.aihub-tbl tr.is-off { opacity: .5; }
+.aihub-sub { color: var(--ah-mut); font-size: 11px; margin-top: 2px; }
+.aihub-url { color: var(--ah-p); font-size: 11px; word-break: break-all; text-decoration: none; }
+.aihub-empty { text-align: center; color: var(--ah-mut); padding: 28px; }
+.aihub-bdg { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 500; }
+.aihub-bdg.on { background: #d1fae5; color: #059669; }
+.aihub-bdg.off { background: #fee2e2; color: #dc2626; }
+
+/* Buttons */
+.aihub-btn {
+  display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px;
+  border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer;
+  border: 1px solid var(--ah-brd); background: #fff; color: var(--ah-txt);
+  text-decoration: none; line-height: 1.4;
+}
+.aihub-btn:hover { background: var(--ah-bg); border-color: #94a3b8; }
+.aihub-btn-sm { padding: 4px 9px; font-size: 11px; }
+.aihub-btn-p { background: var(--ah-grad); color: #fff; border-color: transparent; box-shadow: 0 4px 12px -4px rgba(168,85,247,.45); }
+.aihub-btn-p:hover { color: #fff; opacity: .94; }
+.aihub-btn-danger { color: #b91c1c; background: #fef2f2; border-color: #fecaca; }
+.aihub-btn-danger:hover { background: #fee2e2; }
+
+/* Inline edit + forms */
+.aihub-edit { margin-top: 10px; padding: 12px; background: #fafbff; border: 1px solid var(--ah-brd-soft); border-radius: 8px; }
+.aihub-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+.aihub-fields label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--ah-mut); }
+.aihub-fields label.aihub-full { grid-column: 1 / -1; }
+.aihub-fields input, .aihub-fields select, .aihub-fields textarea {
+  padding: 6px 9px; border: 1px solid var(--ah-brd); border-radius: 6px; font-size: 13px; color: var(--ah-txt); width: 100%; box-sizing: border-box;
+}
+.aihub-form-grid { padding: 16px; background: var(--ah-bg); border-radius: 10px; }
+.aihub-textarea { width: 100%; min-height: 120px; padding: 10px; border: 1px solid var(--ah-brd); border-radius: 6px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; }
+
+/* Settings rows */
+.aihub-rows { max-width: 640px; }
+.aihub-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--ah-brd-soft); gap: 16px; }
+.aihub-row:last-child { border-bottom: none; }
+.aihub-row > label:first-child { font-weight: 500; }
+.aihub-row input[type=text], .aihub-row input[type=number], .aihub-row select { padding: 6px 10px; border: 1px solid var(--ah-brd); border-radius: 6px; font-size: 13px; }
+
+/* Toggle */
+.aihub-toggle { position: relative; width: 42px; height: 23px; flex-shrink: 0; }
+.aihub-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.aihub-toggle .aihub-tg { position: absolute; inset: 0; background: #cbd5e1; border-radius: 23px; cursor: pointer; transition: .2s; }
+.aihub-toggle .aihub-tg::before { content: ''; position: absolute; width: 17px; height: 17px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+.aihub-toggle input:checked + .aihub-tg { background: var(--ah-p); }
+.aihub-toggle input:checked + .aihub-tg::before { transform: translateX(19px); }
+
+.aihub-shortcodes { list-style: none; padding: 0; margin: 8px 0; }
+.aihub-shortcodes li { padding: 4px 0; }
+
+@media (max-width: 782px) {
+  .aihub-fields { grid-template-columns: 1fr; }
+}

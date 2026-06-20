@@ -1,0 +1,254 @@
+/*!
+ * AIHub 前台样式 —— 卡片 / 跑马灯 / 侧边栏广告卡
+ * 全部 aihub- 前缀，避免与主题冲突
+ */
+
+/* ============================================================
+   1. 首页工具卡片（复刻原 .novatool-card 图钉/渐变/折角样式）
+   ============================================================ */
+.aihub-cards {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 15px 0;
+}
+.aihub-card {
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  padding: 16px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+/* 图钉 */
+.aihub-card::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 16px; height: 16px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #cbd5e1);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+.aihub-card::after {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 16px; height: 16px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), transparent 60%);
+  border-radius: 50%;
+  z-index: 3;
+}
+.aihub-pin-shadow {
+  position: absolute;
+  top: 7px; left: 9px;
+  width: 16px; height: 16px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+.aihub-fold-corner {
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(0, 0, 0, 0.05) transparent transparent;
+  border-radius: 0 0 0 5px;
+}
+.aihub-card:hover {
+  transform: translateY(-2px) rotate(1deg);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+.aihub-card-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4f46e5;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  margin-left: 10px;
+}
+.aihub-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #1e293b;
+  line-height: 1.3;
+}
+.aihub-card-desc {
+  color: #475569;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.aihub-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
+}
+.aihub-card-link {
+  display: inline-flex;
+  align-items: center;
+  color: #4f46e5;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+.aihub-card-link::after {
+  content: "→";
+  margin-left: 4px;
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+}
+.aihub-card:hover .aihub-card-link::after { transform: translateX(2px); }
+/* nth-child 渐变变化 */
+.aihub-card:nth-child(1) { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+.aihub-card:nth-child(2) { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+.aihub-card:nth-child(3) { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+.aihub-card:nth-child(4) { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+.aihub-card:nth-child(5) { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+.aihub-card:nth-child(6) { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); }
+@media (max-width: 1024px) { .aihub-cards { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { .aihub-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .aihub-cards { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   2. 快讯跑马灯（横向连续滚动）
+   ============================================================ */
+.aihub-ticker {
+  display: flex;
+  align-items: stretch;
+  background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.aihub-ticker-inject { margin: 0 0 14px; }
+.aihub-ticker-label {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.aihub-ticker-label:hover { color: #fff; opacity: .92; }
+.aihub-ticker-viewport {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+.aihub-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: aihub-marquee var(--aihub-ticker-speed, 40s) linear infinite;
+}
+.aihub-ticker:hover .aihub-ticker-track { animation-play-state: paused; }
+@keyframes aihub-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }  /* 内容复制两份，滚一半即无缝 */
+}
+.aihub-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 22px 8px 0;
+  margin-left: 22px;
+  color: #334155;
+  text-decoration: none;
+  position: relative;
+}
+.aihub-ticker-item::before {
+  content: '';
+  position: absolute;
+  left: -12px; top: 50%;
+  width: 4px; height: 4px;
+  margin-top: -2px;
+  background: #c084fc;
+  border-radius: 50%;
+}
+.aihub-ticker-item:hover .aihub-ticker-text { text-decoration: underline; }
+.aihub-ticker-desc {
+  color: #94a3b8;
+  margin-left: 4px;
+}
+
+/* ============================================================
+   3. 侧边栏广告（纯海报形式，无框/无背景/无标题/无角标）
+   ============================================================ */
+.aihub-ad-holder { margin: 0 0 16px; }
+.aihub-poster-list { display: flex; flex-direction: column; gap: 12px; }
+.aihub-poster {
+  display: block;
+  line-height: 0;            /* 去掉图片底部基线间隙 */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: opacity .15s;
+}
+.aihub-poster:hover { opacity: .92; }
+.aihub-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   4. 横版海报组（一行 2/3 个，多于一页淡入淡出轮播）
+   ============================================================ */
+.aihub-banner-mount { margin: 15px 0; }
+.aihub-banner { display: grid; }
+.aihub-banner-page {
+  grid-area: 1 / 1 / 2 / 2;            /* 所有页叠放在同一格，实现淡入淡出 */
+  display: grid;
+  grid-template-columns: repeat(var(--aihub-cols, 2), 1fr);
+  gap: 14px;
+}
+.aihub-banner-page.is-stacked { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.aihub-banner-page.is-stacked.is-active { opacity: 1; pointer-events: auto; }
+.aihub-banner-item {
+  display: block;
+  line-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .2s, box-shadow .2s;
+}
+.aihub-banner-item:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+.aihub-banner-item img { width: 100%; height: auto; display: block; }
+@media (max-width: 768px) {
+  .aihub-banner-page { grid-template-columns: 1fr; }
+}
+
